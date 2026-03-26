@@ -1,0 +1,12 @@
+---
+title: "Goals"
+description: "Long-term goals and priorities"
+---
+
+# Current Goals
+
+- Build the first modern, API-first commercial real estate ERP that gives institutional operators a clean, traceable general ledger, automated lease billing, and multi-entity accounting — without the legacy baggage of Yardi or MRI.
+
+# Longer-Term Priorities
+
+- Add your medium- and long-term priorities here

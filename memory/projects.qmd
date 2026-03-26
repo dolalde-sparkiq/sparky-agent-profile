@@ -1,0 +1,21 @@
+# Active Projects
+
+## SparkIQ ERP
+- **Goal**: Build the first modern, API-first commercial real estate ERP that gives institutional operators a clean, traceable general ledger, automated lease billing, and multi-entity accounting — without the legacy baggage of Yardi or MRI.
+- **Status**: active
+
+### Repositories
+- **FE**: https://github.com/sparkiq-gh/sparkiq-erp
+  - Stack: Next.js, TypeScript, Tailwind CSS
+  - Structure: `app/`, `components/`, `hooks/`, `lib/`, `utils/`, `helpers/`, `types/`
+  - Monitoring: Sentry (client, server, edge)
+  - Package manager: pnpm
+
+- **BE**: https://github.com/sparkiq-gh/erp-api
+  - Stack: NestJS, TypeScript, Drizzle ORM
+  - Structure: `src/`, `test/`, `scripts/`, `drizzle/`, `Documentation/`, `docs/`
+  - Has `.claude/` Claude Code config
+
+### GitHub Access
+- Authenticated via Claude.ai GitHub MPC as `dolalde-sparkiq`
+- Org: `sparkiq-gh`

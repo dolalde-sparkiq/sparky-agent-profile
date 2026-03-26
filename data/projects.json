@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "id": "sparkiq-erp",
+      "name": "SparkIQ ERP",
+      "description": "Modern API-first commercial real estate ERP. FE: Next.js/TypeScript/Tailwind (sparkiq-gh/sparkiq-erp). BE: NestJS/TypeScript/Drizzle ORM (sparkiq-gh/erp-api).",
+      "location": "/Users/sparkiq/Agents/lightweight-agent/projects/sparkiq-erp",
+      "parts": [],
+      "status": "active",
+      "created": "2026-03-25T22:08:13.605Z",
+      "lastUpdated": "2026-03-25T22:08:13.605Z"
+    }
+  ],
+  "archived": [],
+  "lastUpdated": "2026-03-25T22:08:13.606Z"
+}
