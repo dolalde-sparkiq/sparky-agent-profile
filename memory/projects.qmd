@@ -19,3 +19,46 @@
 ### GitHub Access
 - Authenticated via Claude.ai GitHub MPC as `dolalde-sparkiq`
 - Org: `sparkiq-gh`
+
+
+### GitHub Projects
+- FE Planning: https://github.com/orgs/sparkiq-gh/projects/1
+- BE Planning: https://github.com/orgs/sparkiq-gh/projects/2
+
+### Three Delivery Goals (strategic north star)
+1. **Close the Core Accounting Loop** — Invoice → payment → bank reconciliation end-to-end. Standalone payments, accounting periods, bank reconciliation. P0. Nothing new until this works.
+2. **Deliver the Intercompany Module** — Largest unbuilt block. Biggest differentiator. IC transaction doc → dual-journal posting → FIFO settlement → netting → IC reports. P1.
+3. **Get a Real Client Using It** — Ship MVP reporting (P&L, balance sheet, rent roll). Get a pilot in front of the system before it's finished. P1.
+
+### Core Design Principles (non-negotiable)
+- **Documents ≠ Journals**: Documents = mutable business intent. Journals = immutable accounting truth. Posting engine bridges them.
+- **GL is immutable**: No edits. Changes = reversal + new entry. `is_effective` flag controls what appears in statements.
+- **Legal entity ≠ Ownership**: Entity owns the books. Ownership = derived economic layer, never drives GL posting.
+- **Event engine above documents**: Contract → Terms → Event Engine → Events → Documents → Posting Engine → Journals
+- **API-first, Power BI-friendly**: FE and external tools consume the same API. Reporting via materialized BI tables.
+
+### Intercompany Architecture (key differentiator)
+- Single `intercompany_transaction` document per economic event
+- Posting engine generates TWO journal entries (one per entity) atomically
+- `counterparty_legal_entity_id` on journal lines — no separate IC account per entity pair
+- Settlement: bank wire + FIFO balance application
+- Bidirectional netting supported
+
+### Current Build Status (March 2026)
+| Area | Status |
+|------|--------|
+| Core documents, posting engine, banking, contracts, event engine, CoA, GL viewer, properties, parties | ✅ DONE |
+| Standalone payment documents | ⚠️ PARTIAL |
+| Accounting periods | ❌ NOT BUILT |
+| Bank reconciliation UI | ❌ NOT BUILT |
+| Intercompany module | ❌ FE NOT STARTED / BE PARTIAL |
+| Financial reporting (P&L, BS, rent roll) | ❌ NOT BUILT |
+| Ownership & investor reporting | ❌ NOT STARTED |
+
+### Out of Scope (current phase)
+Maintenance/work orders, tenant portal, construction accounting, payroll, multi-currency, fixed assets, CAM reconciliation (deferred)
+
+### Tech Stack
+- **FE**: Next.js (App Router), TypeScript, Tailwind, shadcn/ui, Sentry, pnpm
+- **BE**: NestJS, TypeScript, Drizzle ORM, PostgreSQL via Supabase, BullMQ, Supabase Auth (SSR/JWT/RLS)
+- **Reporting**: Power BI via materialized `gl_owner_allocations` table
