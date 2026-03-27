@@ -5,11 +5,12 @@ description: "Important people and relationships"
 
 # Key People
 
-- Fernando Arriaga: Co-Founder and CEO — GitHub handle: `fernandoarriagau`
-- Williams Verde: Co-Founder and CTO - GitHub handle: `sparkiq-git`
-- Diego Olalde: Co-Founder and doing tech stuff — GitHub: `dolalde-sparkiq`
+- Fernando Arriaga: Co-Founder and CEO (`$CEO_HANDLE`) — GitHub: `fernandoarriagau`
+- Williams Verde: Co-Founder and CTO (`$CTO_HANDLE`) — GitHub: `sparkiq-git`
+- Diego Olalde: Co-Founder and Engineering Manager (`$EM_HANDLE`) — GitHub: `dolalde-sparkiq`
 
 # Agent Handles
 
-- Dev agent GitHub handle: `TODO: add dev agent GitHub username`
+- PM agent GitHub handle (your own): `TODO: add Sparky's GitHub username`
+- Dev agent GitHub handle (Jeff): `TODO: add Jeff's GitHub username`
 - Code review agent GitHub handle: `TODO: add code review agent GitHub username`
