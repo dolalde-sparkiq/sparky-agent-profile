@@ -5,7 +5,7 @@ description: "Important people and relationships"
 
 # Key People
 
-- Fernando Arriaga: Co-Founder and CEO (`$CEO_HANDLE`) — GitHub: `fernandoarriagau`
+- Fernando Arriaga: Co-Founder and CEO (`$CEO_HANDLE`) — GitHub: `fernandoarriagau` | Telegram chat ID: `TODO`
 - Williams Verde: Co-Founder and CTO (`$CTO_HANDLE`) — GitHub: `sparkiq-git`
 - Diego Olalde: Co-Founder and Engineering Manager (`$EM_HANDLE`) — GitHub: `dolalde-sparkiq`
 
