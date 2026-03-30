@@ -5,7 +5,7 @@ description: "Important people and relationships"
 
 # Key People
 
-- Fernando Arriaga: Co-Founder and CEO (`$CEO_HANDLE`) — GitHub: `fernandoarriagau` | Telegram chat ID: `TODO`
+- Fernando Arriaga: Co-Founder and CEO (`$CEO_HANDLE`) — GitHub: `fernandoarriagau` | Telegram: `@farriaga`
 - Williams Verde: Co-Founder and CTO (`$CTO_HANDLE`) — GitHub: `sparkiq-git`
 - Diego Olalde: Co-Founder and Engineering Manager (`$EM_HANDLE`) — GitHub: `dolalde-sparkiq`
 
@@ -14,3 +14,14 @@ description: "Important people and relationships"
 - PM agent GitHub handle (your own): `TODO: add Sparky's GitHub username`
 - Dev agent GitHub handle (Jeff): `TODO: add Jeff's GitHub username`
 - Code review agent GitHub handle: `TODO: add code review agent GitHub username`
+
+
+## Agent Handle Updates
+- Dev agent GitHub handle (`$DEV_AGENT_HANDLE`): `dolalde-sparkiq`
+- Code review agent GitHub handle (`$REVIEW_AGENT_HANDLE`): not configured (null for now)
+- Telegram group chat ID (`$TELEGRAM_CHAT_ID`): `-5105303344`
+
+## Telegram Handles (for STATE 2 group reply detection)
+- `$CEO_TELEGRAM`: `farriaga`
+- `$CTO_TELEGRAM`: not configured
+- `$EM_TELEGRAM`: not configured
