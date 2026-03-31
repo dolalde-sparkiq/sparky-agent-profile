@@ -1,5 +1,5 @@
 # SparkIQ ERP — Backend Status Report
-**Repo:** `sparkiq-gh/erp-api`
+**Repo:** `sparkiq-gh/sparkiq-erp-be`
 **Stack:** NestJS 11 · TypeScript · Drizzle ORM · PostgreSQL (Supabase) · Fastify · BullMQ · Redis
 **Report Date:** 2026-03-25
 **Primary Engineer:** Daniel Antonini (dantonini@sparkiq.io / @Antonini2207)

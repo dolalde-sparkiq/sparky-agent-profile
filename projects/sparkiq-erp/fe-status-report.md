@@ -1,5 +1,5 @@
 # SparkIQ ERP — Frontend Status Report
-**Repo:** `sparkiq-gh/sparkiq-erp`
+**Repo:** `sparkiq-gh/sparkiq-erp-fe`
 **Stack:** Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Supabase Auth · TanStack Table v8 · Radix UI · Sentry · Vercel
 **Report Date:** 2026-03-25
 **Engineers:** Daniel Antonini (lead), Williams Verde, JCibeiraSparkiq

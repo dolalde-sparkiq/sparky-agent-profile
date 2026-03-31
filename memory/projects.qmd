@@ -1,5 +1,23 @@
-## Repo Name Correction (verified 2026-03-30)
-- FE repo actual name: `sparkiq-gh/sparkiq-erp-fe` — THIS is the live ERP frontend
-- BE repo actual name: `sparkiq-gh/sparkiq-erp-be` (also known as `sparkiq-gh/erp-api`)
-- `sparkiq-gh/sparkiq-starter` is a TEMPLATE repo — NOT the live FE. Do not push ERP work there.
-- FE issues are ENABLED (fixed 2026-03-30) — all tracking/planning/spike issues go in `sparkiq-erp-fe`, never in BE
+---
+title: "Projects"
+description: "Active project context and repository variables for SparkIQ ERP"
+---
+
+# SparkIQ ERP — Project Variables
+
+## Repositories
+
+- FE (`$FRONTEND_REPO`): `sparkiq-gh/sparkiq-erp-fe` — Next.js, TypeScript, Tailwind, shadcn/ui, pnpm
+- BE (`$BACKEND_REPO`): `sparkiq-gh/sparkiq-erp-be` — NestJS, TypeScript, Drizzle ORM, PostgreSQL/Supabase
+- Org (`$ORG`): `sparkiq-gh`
+
+## GitHub Project Boards
+
+- FE board (`$FE_PROJECT_NUM`): `3` → https://github.com/orgs/sparkiq-gh/projects/3
+- BE board (`$BE_PROJECT_NUM`): `4` → https://github.com/orgs/sparkiq-gh/projects/4
+
+## Do Not Use — Old/Wrong Names
+
+- `sparkiq-gh/sparkiq-erp` — OLD FE repo name, no longer exists
+- `sparkiq-gh/erp-api` — OLD BE repo name, no longer used
+- `sparkiq-gh/sparkiq-starter` — TEMPLATE repo only, never push ERP work there

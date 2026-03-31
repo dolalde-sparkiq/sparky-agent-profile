@@ -3,7 +3,7 @@
     {
       "id": "sparkiq-erp",
       "name": "SparkIQ ERP",
-      "description": "Modern API-first commercial real estate ERP. FE: Next.js/TypeScript/Tailwind (sparkiq-gh/sparkiq-erp). BE: NestJS/TypeScript/Drizzle ORM (sparkiq-gh/erp-api).",
+      "description": "Modern API-first commercial real estate ERP. FE: Next.js/TypeScript/Tailwind (sparkiq-gh/sparkiq-erp-fe). BE: NestJS/TypeScript/Drizzle ORM (sparkiq-gh/sparkiq-erp-be).",
       "location": "/Users/sparkiq/Agents/lightweight-agent/projects/sparkiq-erp",
       "parts": [],
       "status": "active",
