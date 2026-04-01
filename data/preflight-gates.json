@@ -22,9 +22,33 @@
         "expect": "non-zero-output"
       },
       {
+        "name": "awaiting-human-issues",
+        "type": "shell",
+        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label status:awaiting-human --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label status:awaiting-human --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "expect": "non-zero-output"
+      },
+      {
         "name": "open-prs",
         "type": "shell",
         "command": "count_fe=$(gh pr list --repo sparkiq-gh/sparkiq-erp-fe --state open --json number --jq 'length') && count_be=$(gh pr list --repo sparkiq-gh/sparkiq-erp-be --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "sprint-milestone-due",
+        "type": "shell",
+        "command": "today=$(date -u +%Y-%m-%d) && gh api repos/sparkiq-gh/sparkiq-erp-fe/milestones --jq \"[.[] | select(.state == \\\"open\\\" and .due_on != null and (.due_on[:10] <= \\\"$today\\\"))] | length\"",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "in-sprint-stories-needing-tasks",
+        "type": "shell",
+        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label type:story --label status:in-sprint --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label type:story --label status:in-sprint --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "backlog-stories-no-active-sprint",
+        "type": "shell",
+        "command": "active=$(gh api repos/sparkiq-gh/sparkiq-erp-fe/milestones --jq '[.[] | select(.state == \"open\")] | length') && if [ \"$active\" = \"0\" ]; then count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label type:story --label status:backlog --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label type:story --label status:backlog --state open --json number --jq 'length') && echo $(($count_fe + $count_be)); else echo 0; fi",
         "expect": "non-zero-output"
       }
     ],
