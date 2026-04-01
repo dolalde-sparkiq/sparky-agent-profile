@@ -20,4 +20,4 @@ description: "Important people and relationships"
 
 - CEO (`$CEO_TELEGRAM`): `farriaga`
 - CTO (`$CTO_TELEGRAM`): not configured
-- EM (`$EM_TELEGRAM`): not configured
+- EM (`$EM_TELEGRAM`): `diego1494o`
