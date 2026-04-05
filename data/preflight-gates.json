@@ -4,9 +4,27 @@
     "mode": "any",
     "checks": [
       {
-        "name": "in-development-issues",
+        "name": "in-development-any",
         "type": "shell",
         "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label status:in-development --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label status:in-development --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "unprocessed-requests",
+        "type": "shell",
+        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label type:request --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label type:request --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "unprocessed-bugs",
+        "type": "shell",
+        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do count=$(gh issue list --repo $repo --label type:bug --state open --json number,labels --jq '[.[] | select(.labels | map(.name) | all(test("^status:") | not))] | length'); if [ \"$count\" -gt 0 ]; then echo 1; exit 0; fi; done; echo 0",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "backlog-items",
+        "type": "shell",
+        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label status:backlog --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label status:backlog --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
         "expect": "non-zero-output"
       },
       {
@@ -18,19 +36,13 @@
       {
         "name": "epic-completed",
         "type": "shell",
-        "command": "for num in $(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label type:epic --state open --json number --jq '.[].number') $(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label type:epic --state open --json number --jq '.[].number'); do repo=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --state open --json number --jq \"[.[].number] | if (. | index($num)) then \\\"sparkiq-gh/sparkiq-erp-fe\\\" else null end\" 2>/dev/null); done; for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label type:epic --state open --json number --jq '.[].number'); do result=$(gh api repos/$repo/issues/$num --jq 'if .sub_issues_summary.total > 0 and .sub_issues_summary.completed == .sub_issues_summary.total then 1 else 0 end'); if [ \"$result\" = \"1\" ]; then echo 1; exit 0; fi; done; done; echo 0",
+        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label type:epic --state open --json number --jq '.[].number'); do result=$(gh api repos/$repo/issues/$num --jq 'if .sub_issues_summary.total > 0 and .sub_issues_summary.completed == .sub_issues_summary.total then 1 else 0 end'); if [ \"$result\" = \"1\" ]; then echo 1; exit 0; fi; done; done; echo 0",
         "expect": "non-zero-output"
       },
       {
-        "name": "epic-needs-decomposition",
+        "name": "epic-no-plan",
         "type": "shell",
-        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label type:epic --state open --json number --jq '.[].number'); do total=$(gh api repos/$repo/issues/$num --jq '.sub_issues_summary.total'); if [ \"$total\" = \"0\" ]; then echo 1; exit 0; fi; done; done; echo 0",
-        "expect": "non-zero-output"
-      },
-      {
-        "name": "story-done-next-assignable",
-        "type": "shell",
-        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label type:epic --state open --json number --jq '.[].number'); do summary=$(gh api repos/$repo/issues/$num --jq '{t: .sub_issues_summary.total, c: .sub_issues_summary.completed}'); total=$(echo $summary | jq -r '.t'); completed=$(echo $summary | jq -r '.c'); if [ \"$completed\" -gt 0 ] && [ \"$completed\" -lt \"$total\" ]; then in_dev=$(gh issue list --repo $repo --label status:in-development --label type:story --state open --json number --jq 'length'); if [ \"$in_dev\" = \"0\" ]; then echo 1; exit 0; fi; fi; done; done; echo 0",
+        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label type:epic --label status:in-development --state open --json number --jq '.[].number'); do total=$(gh api repos/$repo/issues/$num --jq '.sub_issues_summary.total'); if [ \"$total\" = \"0\" ]; then echo 1; exit 0; fi; done; done; echo 0",
         "expect": "non-zero-output"
       }
     ],
