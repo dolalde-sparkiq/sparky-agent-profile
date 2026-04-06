@@ -40,9 +40,9 @@
         "expect": "non-zero-output"
       },
       {
-        "name": "awaiting-acceptance",
+        "name": "awaiting-acceptance-with-reply",
         "type": "shell",
-        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label status:awaiting-acceptance --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label status:awaiting-acceptance --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label status:awaiting-acceptance --state open --json number --jq '.[].number'); do replied=$(gh api repos/$repo/issues/$num/comments --jq 'if length > 0 and (last.body | test(\"Acceptance Review\") | not) then 1 else 0 end'); if [ \"$replied\" = \"1\" ]; then echo 1; exit 0; fi; done; done; echo 0",
         "expect": "non-zero-output"
       },
       {
