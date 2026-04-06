@@ -4,9 +4,9 @@
     "mode": "any",
     "checks": [
       {
-        "name": "in-development-any",
+        "name": "in-development-stale",
         "type": "shell",
-        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label status:in-development --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label status:in-development --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "command": "threshold=$(date -u -v-90M +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -d '90 minutes ago' +%Y-%m-%dT%H:%M:%SZ); for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do gh issue list --repo $repo --label status:in-development --state open --json updatedAt --jq '.[].updatedAt' | while read updated; do if expr \"$threshold\" '>' \"$updated\" >/dev/null 2>&1; then echo 1; exit 0; fi; done; done; echo 0",
         "expect": "non-zero-output"
       },
       {
@@ -18,7 +18,7 @@
       {
         "name": "unprocessed-bugs",
         "type": "shell",
-        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do count=$(gh issue list --repo $repo --label type:bug --state open --json number,labels --jq '[.[] | select(.labels | map(.name) | all(test("^status:") | not))] | length'); if [ \"$count\" -gt 0 ]; then echo 1; exit 0; fi; done; echo 0",
+        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do count=$(gh issue list --repo $repo --label type:bug --state open --json number,labels --jq '[.[] | select(.labels | map(.name) | all(test(\"^status:\") | not))] | length'); if [ \"$count\" -gt 0 ]; then echo 1; exit 0; fi; done; echo 0",
         "expect": "non-zero-output"
       },
       {
@@ -37,6 +37,18 @@
         "name": "epic-completed",
         "type": "shell",
         "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label type:epic --state open --json number --jq '.[].number'); do result=$(gh api repos/$repo/issues/$num --jq 'if .sub_issues_summary.total > 0 and .sub_issues_summary.completed == .sub_issues_summary.total then 1 else 0 end'); if [ \"$result\" = \"1\" ]; then echo 1; exit 0; fi; done; done; echo 0",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "awaiting-acceptance",
+        "type": "shell",
+        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label status:awaiting-acceptance --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label status:awaiting-acceptance --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
+        "expect": "non-zero-output"
+      },
+      {
+        "name": "bugs-done-no-acceptance",
+        "type": "shell",
+        "command": "count_fe=$(gh issue list --repo sparkiq-gh/sparkiq-erp-fe --label type:bug --label status:done --state open --json number --jq 'length') && count_be=$(gh issue list --repo sparkiq-gh/sparkiq-erp-be --label type:bug --label status:done --state open --json number --jq 'length') && echo $(($count_fe + $count_be))",
         "expect": "non-zero-output"
       },
       {

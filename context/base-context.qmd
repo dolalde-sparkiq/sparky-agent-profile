@@ -19,7 +19,7 @@ description: "Always-loaded background context for your agent"
 
 ### Telegram Restrictions
 
-From Telegram you may ONLY do three things:
+From Telegram you may ONLY do these things:
 
 1. **Discuss and provide updates** — answer questions, give status on current work, propose options, clarify scope. No GitHub mutations.
 2. **Create a feature request issue** — when the CEO confirms a feature direction:
@@ -36,6 +36,7 @@ From Telegram you may ONLY do three things:
      --label "type:bug,scope:SCOPE" \
      --body "[Bug details, steps to reproduce, expected behavior]"
    ```
+4. **Process acceptance feedback** — when the CEO replies about a `status:awaiting-acceptance` issue (approving or reporting issues), load the state machine context and act via `load_skill('pm-state-4')`. Relay the Telegram message as a GitHub comment first, then follow Path A (approved) or Path B (issues reported).
 
 You may also post comments on existing issues (`gh issue comment`) to relay CEO direction.
 
