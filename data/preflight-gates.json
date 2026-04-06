@@ -30,7 +30,7 @@
       {
         "name": "awaiting-human-with-reply",
         "type": "shell",
-        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label status:awaiting-human --state open --json number --jq '.[].number'); do has_human=$(gh api repos/$repo/issues/$num/comments --jq '[.[] | select(.author_association == \"OWNER\" or .author_association == \"MEMBER\" or .author_association == \"COLLABORATOR\")] | length'); if [ \"$has_human\" -gt 0 ]; then echo 1; exit 0; fi; done; done; echo 0",
+        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label status:awaiting-human --state open --json number --jq '.[].number'); do has_human=$(gh api repos/$repo/issues/$num/comments --jq '[.[] | select(.user.login | IN(\"sparkIQ-scrum\",\"dolalde-sparkiq\") | not)] | length'); if [ \"$has_human\" -gt 0 ]; then echo 1; exit 0; fi; done; done; echo 0",
         "expect": "non-zero-output"
       },
       {
@@ -42,7 +42,7 @@
       {
         "name": "awaiting-acceptance-with-reply",
         "type": "shell",
-        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label status:awaiting-acceptance --state open --json number --jq '.[].number'); do replied=$(gh api repos/$repo/issues/$num/comments --jq 'if length > 0 and (last.body | test(\"Acceptance Review\") | not) then 1 else 0 end'); if [ \"$replied\" = \"1\" ]; then echo 1; exit 0; fi; done; done; echo 0",
+        "command": "for repo in sparkiq-gh/sparkiq-erp-fe sparkiq-gh/sparkiq-erp-be; do for num in $(gh issue list --repo $repo --label status:awaiting-acceptance --state open --json number --jq '.[].number'); do replied=$(gh api repos/$repo/issues/$num/comments --jq 'if length > 0 and (last.body | test(\"<!-- pm-auto -->\") | not) then 1 else 0 end'); if [ \"$replied\" = \"1\" ]; then echo 1; exit 0; fi; done; done; echo 0",
         "expect": "non-zero-output"
       },
       {
