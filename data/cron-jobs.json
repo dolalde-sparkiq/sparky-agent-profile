@@ -6,6 +6,6 @@
     "action": "Run the pm-agent state machine: load skill pm-agent, then scan GitHub across sparkiq-gh/sparkiq-erp-fe and sparkiq-gh/sparkiq-erp-be and execute the first matching state. Dev agent handle: dolalde-sparkiq. GitHub Projects: FE = https://github.com/orgs/sparkiq-gh/projects/3, BE = https://github.com/orgs/sparkiq-gh/projects/4.",
     "enabled": true,
     "createdAt": "2026-03-30T13:06:58.179Z",
-    "lastRun": "2026-04-05T19:20:00.355Z"
+    "lastRun": "2026-04-07T06:35:00.481Z"
   }
 ]
